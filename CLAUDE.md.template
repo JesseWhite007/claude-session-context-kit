@@ -1,0 +1,47 @@
+# CLAUDE.md — Project Persistent Context
+
+## Session Management Rules
+
+### Pre-Compact Rule
+当你检测到 context window 即将满或准备 compact 时，**先**将以下内容写入
+`CC-Session-Logs/auto-compact-{YYYYMMDD-HHmmss}.md`，**然后**再执行 compact：
+- 当前正在处理的任务、进度、阻塞点
+- 所有未完成的文件修改（文件路径 + 改了什么）
+- 关键的调试发现和决策
+- 下一步计划
+
+### Session Exit Rule
+当用户发出结束信号（"bye"、"done"、"收工"、"今天到这"、"结束"、"下班"），
+**自动**执行 /compress，不要询问——直接做。
+
+### Session Start Rule
+新 session 开始时，如果用户说 "继续" / "resume" / "接着干"：
+1. 读取本文件获取项目级上下文
+2. 读取 `CC-Session-Logs/` 下最新 1-2 个日志获取上次工作状态
+3. 简要汇报上次进度，然后继续工作
+
+---
+
+## Project State (手动或自动更新)
+
+### Current Branch
+<!-- 当前工作分支 -->
+main
+
+### Active Tasks
+<!-- 当前进行中的任务，每次 /preserve 时更新 -->
+- [ ] (placeholder)
+
+### Key Decisions
+<!-- 重要的架构/设计决策，长期保留 -->
+
+### Known Issues / Blockers
+<!-- 当前阻塞问题 -->
+
+---
+
+## Tech Stack
+<!-- 项目技术栈速查，根据实际项目填写 -->
+- Language: C++17 / Python 3 / Bash
+- Build: (cmake / make / etc.)
+- Platform: Linux (CentOS / Ubuntu)
