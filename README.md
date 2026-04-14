@@ -48,10 +48,14 @@ your-project/
 
 ## 工作流
 
+如果你想恢复上一次已经结束的 session（没 compress 的）：
+bashclaude --resume
+
 ### 开始工作
 
 ```
 $ claude
+
 > /resume
 
 📋 Session Resumed
